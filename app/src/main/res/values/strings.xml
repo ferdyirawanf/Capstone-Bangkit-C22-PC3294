@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">NewsCast</string>
+    <string name="no_news_articles_found">No News Articles Found</string>
+    <string name="settings">Settings</string>
+    <string name="title_activity_news_paper">ScrollingActivity</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+
+    </string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="news_paper_author">by %s</string>
+    <string name="news_paper_news_topic">Â¬ %s</string>
+    <string name="news_paper_news_url">Source: %s</string>
+
+    <string name="app_label">NewsCast</string>
+    <string name="search_hint">Search for a keyword</string>
+    <string name="no_search_results_found">No Search Results Found</string>
+    <string name="add_favourites_to_get_started">Add favourites to get started</string>
+    <string name="favourites">Favourites</string>
+    <string name="search">Search</string>
+    <string name="refresh">Refresh</string>
+    <string name="clear_all_favourites">Clear all favourites</string>
+    <string name="search_view_title">Search View</string>
+    <string name="world">World</string>
+    <string name="us">US</string>
+    <string name="politics">Politics</string>
+    <string name="business">Business</string>
+    <string name="tech">Tech</string>
+    <string name="science">Science</string>
+    <string name="sports">Sports</string>
+    <string name="travel">Travel</string>
+    <string name="culture">Culture</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="reader_header">Reading Preferences</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="language_title">Default language</string>
+    <string name="text_size_title">Text Size</string>
+    <string name="background_colour_title">Background</string>
+
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+</resources>
