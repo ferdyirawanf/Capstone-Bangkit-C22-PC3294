@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
+        tools:context=".ui.newspaper.NewsPaperActivity">
+
+        <LinearLayout
+            android:id="@+id/news_paper_parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/news_paper_article_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:src="@tools:sample/avatars" />
+
+            <LinearLayout
+                android:id="@+id/news_paper_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/news_paper_article_date"
+                        style="@style/Subtitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="7dp"
+                        android:visibility="visible"
+                        tools:text="Â¬ Fruit News"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/news_paper_favourite_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="330dp"
+                        android:src="@drawable/ic_favorite_border" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/news_paper_article_title"
+                    style="@style/Headline1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="title"
+                    tools:text="Llama Patrol The Central Coast of California" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/Headline3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="-12dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="By : " />
+                    <TextView
+                        android:id="@+id/news_paper_article_author"
+                        style="@style/Headline3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:text="author"
+                        tools:text="Betty Eghan" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/news_paper_article_text"
+                    style="@style/Content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="article"
+                    tools:text="@string/large_text" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textView3"
+                        style="@style/Headline4"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="-10dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Full Article : " />
+
+                    <TextView
+                        android:id="@+id/news_paper_article_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:text="url"
+                        android:autoLink="web"
+                        android:textColorLink="@color/link"
+                        android:textIsSelectable="true"
+                        tools:text="https://en.wikipedia.org/wiki/News" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>
