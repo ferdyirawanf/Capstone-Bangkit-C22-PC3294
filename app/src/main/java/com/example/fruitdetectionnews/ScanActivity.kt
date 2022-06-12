@@ -9,7 +9,9 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.createScaledBitmap
 import android.net.Uri
 import android.os.Bundle
+import android.os.Debug
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -44,6 +46,7 @@ class ScanActivity : AppCompatActivity() {
         }
 
         var tvHasilKesegaran : TextView = findViewById(R.id.tvHasilKesegaran)
+        var tvHasilAkurasi : TextView = findViewById(R.id.tvHasilAkurasi)
 
         btnScan.setOnClickListener {
             showOptionDialog()
@@ -104,14 +107,14 @@ class ScanActivity : AppCompatActivity() {
         val model = Model.newInstance(applicationContext)
 
         // Creates inputs for reference.
-        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-        val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 100, 100, 3), DataType.FLOAT32)
+        val byteBuffer = ByteBuffer.allocateDirect(4 * 100 * 100 * 3)
         byteBuffer.order(ByteOrder.nativeOrder());
-        val intValues = IntArray(224 * 224)
-        bitmapImage.getPixels(intValues, 0, bitmapImage.getWidth(), 0, 0, bitmapImage.getWidth(), bitmapImage.getHeight())
+        val intValues = IntArray(100 * 100)
+        bitmapImage.getPixels(intValues, 0, bitmapImage.width, 0, 0, bitmapImage.width, bitmapImage.height)
         var pixel = 0
-        for (i in 0 until 224) {
-            for (j in 0 until 224) {
+        for (i in 0 until 100) {
+            for (j in 0 until 100) {
                 val `val` = intValues[pixel++] // RGB
                 byteBuffer.putFloat((`val` shr 16 and 0xFF) * (1f / 1))
                 byteBuffer.putFloat((`val` shr 8 and 0xFF) * (1f / 1))
@@ -135,7 +138,12 @@ class ScanActivity : AppCompatActivity() {
             }
         }
         val classes = arrayOf("Fresh", "Rotten")
+        Log.i("Result", confidences[0].toString())
+        //Log.i("Result", confidences[1].toString())
+        Log.i("Result", confidences.indices.toString())
+
         tvHasilKesegaran.setText(classes[maxPos])
+        tvHasilAkurasi.setText((confidences[maxPos]*100).toString() + " %")
 
         // Releases model resources if no longer used.
         model.close()
@@ -146,13 +154,13 @@ class ScanActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
             var image: Bitmap = data?.extras?.get("data") as Bitmap
             imagePreview.setImageBitmap(image)
+            image = Bitmap.createScaledBitmap(image, 100, 100, false);
             predictImage(image)
         } else if (requestCode == REQUEST_PICK_PHOTO && resultCode == Activity.RESULT_OK) {
             val dat: Uri? = data?.getData()
             var image: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dat)
-
             imagePreview.setImageBitmap(image)
-
+            image = Bitmap.createScaledBitmap(image, 100, 100, false);
             predictImage(image)
         }
     }

@@ -99,7 +99,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="Kesegaran: "
                     android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tvHasilKesegaran"
@@ -109,7 +109,7 @@
                     android:layout_toEndOf="@+id/tvKesegaran"
                     android:text="-"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -126,7 +126,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="Akurasi: "
                     android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tvHasilAkurasi"
@@ -136,7 +136,7 @@
                     android:layout_toEndOf="@+id/tvAkurasi"
                     android:text="-"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
