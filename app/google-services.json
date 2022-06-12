@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "191483579386",
+    "project_id": "fruitdetectionnews",
+    "storage_bucket": "fruitdetectionnews.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191483579386:android:3da23cb3ff29c2062f3243",
+        "android_client_info": {
+          "package_name": "com.example.fruitdetectionnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191483579386-h1q54q7bhkk1kdbec83fdesg2tuiotr9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0Xn8rtvy4DP6oAMpX7UyUTCxpWWRO1NQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191483579386-h1q54q7bhkk1kdbec83fdesg2tuiotr9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

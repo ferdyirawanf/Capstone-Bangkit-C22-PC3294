@@ -111,6 +111,7 @@ class ScanActivity : AppCompatActivity() {
         val byteBuffer = ByteBuffer.allocateDirect(4 * 100 * 100 * 3)
         byteBuffer.order(ByteOrder.nativeOrder());
         val intValues = IntArray(100 * 100)
+        byteBuffer.rewind()
         bitmapImage.getPixels(intValues, 0, bitmapImage.width, 0, 0, bitmapImage.width, bitmapImage.height)
         var pixel = 0
         for (i in 0 until 100) {
@@ -128,22 +129,17 @@ class ScanActivity : AppCompatActivity() {
         val outputs = model.process(inputFeature0)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer
 
-        val confidences = outputFeature0.floatArray
-        var maxPos = 0
-        var maxConfidence = 0f
-        for (i in confidences.indices) {
-            if (confidences[i] > maxConfidence) {
-                maxConfidence = confidences[i]
-                maxPos = i
-            }
+        var resultPrdict = outputFeature0.floatArray[0]
+        var classes = ""
+        if (resultPrdict >= 0.5) {
+            classes = "Fresh"
+        } else {
+            classes = "Busuk"
         }
-        val classes = arrayOf("Fresh", "Rotten")
-        Log.i("Result", confidences[0].toString())
-        //Log.i("Result", confidences[1].toString())
-        Log.i("Result", confidences.indices.toString())
+        Log.i("Result", resultPrdict.toString())
 
-        tvHasilKesegaran.setText(classes[maxPos])
-        tvHasilAkurasi.setText((confidences[maxPos]*100).toString() + " %")
+        tvHasilKesegaran.setText(classes)
+        tvHasilAkurasi.setText((resultPrdict*100).toString() + " %")
 
         // Releases model resources if no longer used.
         model.close()
@@ -154,13 +150,13 @@ class ScanActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
             var image: Bitmap = data?.extras?.get("data") as Bitmap
             imagePreview.setImageBitmap(image)
-            image = Bitmap.createScaledBitmap(image, 100, 100, false);
+            image = Bitmap.createScaledBitmap(image, 100, 100, true);
             predictImage(image)
         } else if (requestCode == REQUEST_PICK_PHOTO && resultCode == Activity.RESULT_OK) {
             val dat: Uri? = data?.getData()
             var image: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dat)
             imagePreview.setImageBitmap(image)
-            image = Bitmap.createScaledBitmap(image, 100, 100, false);
+            image = Bitmap.createScaledBitmap(image, 100, 100, true);
             predictImage(image)
         }
     }
