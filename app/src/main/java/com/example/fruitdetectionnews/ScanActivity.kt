@@ -1,16 +1,23 @@
 package com.example.fruitdetectionnews
 
 import android.Manifest
+import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.graphics.Bitmap.createScaledBitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.BitmapCompat.createScaledBitmap
+import com.example.fruitdetectionnews.ml.Model
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -18,7 +25,10 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_scan.*
 import okio.IOException
-import android.graphics.Bitmap
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 
 
 class ScanActivity : AppCompatActivity() {
@@ -32,6 +42,8 @@ class ScanActivity : AppCompatActivity() {
         if (isAlreadyHavePermission()) {
             requestForSpecificPermission()
         }
+
+        var tvHasilKesegaran : TextView = findViewById(R.id.tvHasilKesegaran)
 
         btnScan.setOnClickListener {
             showOptionDialog()
@@ -78,7 +90,7 @@ class ScanActivity : AppCompatActivity() {
                             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                             startActivityForResult(intent, REQUEST_CAMERA)
                         } catch (ex: IOException) {
-                            Toast.makeText(this@ScanActivity, "Gagal saat membuka kamera!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@ScanActivity, "Gagal membuka kamera!", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -89,7 +101,44 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private fun predictImage(bitmapImage: Bitmap) {
-        // TODO
+        val model = Model.newInstance(applicationContext)
+
+        // Creates inputs for reference.
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
+        val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
+        byteBuffer.order(ByteOrder.nativeOrder());
+        val intValues = IntArray(224 * 224)
+        bitmapImage.getPixels(intValues, 0, bitmapImage.getWidth(), 0, 0, bitmapImage.getWidth(), bitmapImage.getHeight())
+        var pixel = 0
+        for (i in 0 until 224) {
+            for (j in 0 until 224) {
+                val `val` = intValues[pixel++] // RGB
+                byteBuffer.putFloat((`val` shr 16 and 0xFF) * (1f / 1))
+                byteBuffer.putFloat((`val` shr 8 and 0xFF) * (1f / 1))
+                byteBuffer.putFloat((`val` and 0xFF) * (1f / 1))
+            }
+        }
+
+        inputFeature0.loadBuffer(byteBuffer)
+
+        // Runs model inference and gets result.
+        val outputs = model.process(inputFeature0)
+        val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+
+        val confidences = outputFeature0.floatArray
+        var maxPos = 0
+        var maxConfidence = 0f
+        for (i in confidences.indices) {
+            if (confidences[i] > maxConfidence) {
+                maxConfidence = confidences[i]
+                maxPos = i
+            }
+        }
+        val classes = arrayOf("Fresh", "Rotten")
+        tvHasilKesegaran.setText(classes[maxPos])
+
+        // Releases model resources if no longer used.
+        model.close()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -98,10 +147,13 @@ class ScanActivity : AppCompatActivity() {
             var image: Bitmap = data?.extras?.get("data") as Bitmap
             imagePreview.setImageBitmap(image)
             predictImage(image)
-
-            // if result fresh then change in text view ...
         } else if (requestCode == REQUEST_PICK_PHOTO && resultCode == Activity.RESULT_OK) {
-            // TODO
+            val dat: Uri? = data?.getData()
+            var image: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dat)
+
+            imagePreview.setImageBitmap(image)
+
+            predictImage(image)
         }
     }
 
