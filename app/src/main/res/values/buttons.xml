@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icons">
+        <item>@drawable/ic_baseline_photo_camera_24</item>
+        <item>@drawable/ic_baseline_pin_drop_24</item>
+        <item>@drawable/ic_baseline_news_24</item>
+        <item>@drawable/ic_baseline_history_24</item>
+    </array>
+    <array name="colors">
+        <item>@color/pink</item>
+        <item>@color/softBlue</item>
+        <item>@color/orange</item>
+        <item>@color/green</item>
+    </array>
+</resources>

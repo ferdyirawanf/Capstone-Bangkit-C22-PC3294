@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pink">#FFE25372</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="BottomNavBackground">#FFFFFF</color>
+    <color name="BottomNavSelected">#D4506D</color>
+    <color name="colorPrimary">#E25372</color>
+    <color name="colorAccent">#FF03DAC5</color>F8F1D1
+    <color name="colorSecondary">#F8F1D1</color>
+    <color name="softBlue">#32e0c4</color>
+    <color name="colorAccentDark">#029788</color>
+    <color name="orange">#ff8303</color>
+    <color name="green">#4ded30</color>
+
+    <color name="black1">#000000</color>
+    <color name="black2">#CC000000</color>
+    <color name="black3">#99000000</color>
+    <color name="black4">#66000000</color>
+    <color name="black5">#33000000</color>
+
+    <color name="white1">#FFFFFF</color>
+    <color name="white2">#CCFFFFFF</color>
+    <color name="white3">#99FFFFFF</color>
+    <color name="white4">#66FFFFFF</color>
+    <color name="white5">#33FFFFFF</color>
+
+    <color name="purple1">#6200EE</color>
+    <color name="purple2">#CC6200EE</color>
+    <color name="purple3">#996200EE</color>
+    <color name="purple4">#666200EE</color>
+    <color name="purple5">#336200EE</color>
+
+    <color name="accent1">#03DAC5</color>
+    <color name="accent2">#CC03DAC5</color>
+    <color name="accent3">#9903DAC5</color>
+    <color name="accent4">#6603DAC5</color>
+    <color name="accent5">#3303DAC5</color>
+
+    <color name="link">#0645AD</color>
+
+    <color name="light">#FFFFFF</color>
+    <color name="sepia">#80714A23</color>
+    <color name="dark">#803C3C3C</color>
+
+    <color name="colorBackground">#f9f9fa</color>
+    <color name="colorTextSubtitle">#4e4e4e</color>
+    <color name="colorTextTitle">#262626</color>
+
+
+</resources>
